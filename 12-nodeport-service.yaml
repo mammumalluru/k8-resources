@@ -8,8 +8,10 @@ metadata:
 spec:
   containers:
   - name: httpd
-    image: httpd:latest
-    command: ["httpd", "-DFOREGROUND"]
+    image: httpd
+    ports:
+      - name: http   # 🔥 IMPORTANT
+        containerPort: 80
     envFrom:
     - secretRef:
         name: pod-secrets
@@ -21,11 +23,10 @@ kind: Service
 metadata:
   name: my-service
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     topic: secret
     tool: k8
   ports:
-  - protocol: TCP
-    port: 80  # service port
-    targetPort: 32760 # target port
+  - port: 80
+    targetPort: http   # 🔥 use name instead of number
