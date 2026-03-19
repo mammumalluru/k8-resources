@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  # Configuration values can be set as key-value properties
+  database_host: "mysql"
+  db_name: "rds"
+  environment: "dev"
+  

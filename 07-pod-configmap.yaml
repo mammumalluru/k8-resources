@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+    name: nginx
+    image: nginx
+    # env:
+    #   # Inject a single key-value pair as an environment variable
+    #   - name: database_host
+    #     valueFrom:
+    #       configMapKeyRef:
+    #         name: app-config
+    #         key: database_host
+      # Inject all key-value pairs as environment variables
+    envFrom:
+    - configMapRef:
+        name: app-config
+    
